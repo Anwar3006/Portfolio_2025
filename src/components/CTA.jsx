@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useRef } from "react";
+import { Link } from "react-router";
 
 const CTA = () => {
   const containerRef = useRef(null);
@@ -106,12 +107,12 @@ const CTA = () => {
         </div>
 
         <div>
-          <a
-            href="mailto:anwarsadat.d2@gmail.com"
+          <Link
+            to="mailto:anwarsadat.d2@gmail.com"
             className="font-extralight text-xs sm:text-sm md:text-base text-gray-800 hover:text-gray-600 transition-colors"
           >
             anwarsadat.d2@gmail.com
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -4,19 +4,20 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router";
 
 // Register plugins
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectLink = ({ project, side = "left" }) => {
   return (
-    <a
-      href={project.url}
+    <Link
+      to={project.url}
       className={`${side === "left" ? "text-left" : "text-right"}`}
     >
       <h3 className="text-white">{project.name}</h3>
       <p className="text-400 text-sm">{project.description}</p>
-    </a>
+    </Link>
   );
 };
 

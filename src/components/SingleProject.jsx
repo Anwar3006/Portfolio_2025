@@ -1,3 +1,5 @@
+import { Link, useNavigate } from "react-router";
+
 // Component
 const SingleProject = ({
   title,
@@ -7,6 +9,15 @@ const SingleProject = ({
   nextProjectTitle,
   nextProjectHref,
 }) => {
+  const navigate = useNavigate();
+
+  const handleScroll = (path) => {
+    navigate(path);
+
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
+  };
   return (
     <div className="w-screen h-dvh mt-16 md:mt-32">
       {/* Section Header */}
@@ -69,8 +80,9 @@ const SingleProject = ({
             {nextProjectTitle}
           </h2>
         </div>
-        <a
-          href={nextProjectHref}
+        <Link
+          to={`${nextProjectHref}`}
+          onClick={() => handleScroll()}
           className="group flex items-center justify-center gap-2"
         >
           <p className="text-xs md:text-sm text-nowrap group-hover:text-400 transition-colors duration-500">
@@ -81,7 +93,7 @@ const SingleProject = ({
             alt="custom_arrow_icon"
             className="w-4 h-4 md:w-6 md:h-6 brightness-0 group-hover:brightness-[55%] transition-colors duration-500"
           />
-        </a>
+        </Link>
       </div>
     </div>
   );

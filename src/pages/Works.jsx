@@ -68,7 +68,7 @@ const Works = () => {
           image="/images/p2-gif.jpg"
           date={Date.now()}
           techStack={projectTwoStacks}
-          projectUrl="zentry-clone"
+          projectUrl="project-2"
         />
         <WorkOverview
           ref={thirdWorkRef}
@@ -76,7 +76,7 @@ const Works = () => {
           image="/images/p2-gif.jpg"
           date={Date.now()}
           techStack={projectThreeStacks}
-          projectUrl="zentry-clone"
+          projectUrl="project-3"
         />
       </div>
     </div>

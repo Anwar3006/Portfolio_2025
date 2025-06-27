@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import SingleProject from "../components/SingleProject";
 import { useLocation } from "react-use";
 import { projectTwoStacks, projectZentryStacks } from "../utils/data";
+import { Link } from "react-router";
 
 const zentryCloneMedia = [
   "/zentry-clone/zentry-clone-wf.png",
@@ -19,8 +20,9 @@ const projectTwoMedia = [
 
 const Project = () => {
   const location = useLocation();
-  const projectSlug = location.pathname.split("/")[2];
-  console.log(projectSlug);
+  // const projectSlug = location.pathname.split("/")[2]; //when using BrowserRouter
+  const projectSlug = location.hash.split("/")[2]; //when using HashRouter
+
   const renderSingleProject = (slug) => {
     switch (slug) {
       case "zentry-clone":
@@ -54,12 +56,12 @@ const Project = () => {
             <p className="text-gray-400 mb-8">
               The project you're looking for doesn't exist.
             </p>
-            <a
-              href="/works"
+            <Link
+              to="/works"
               className="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors"
             >
               Back to Works
-            </a>
+            </Link>
           </div>
         );
     }

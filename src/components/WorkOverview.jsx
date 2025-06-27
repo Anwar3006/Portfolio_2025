@@ -2,6 +2,7 @@ import { useGSAP } from "@gsap/react";
 import { format } from "date-fns";
 import gsap from "gsap";
 import { useRef } from "react";
+import { Link } from "react-router";
 
 const WorkOverview = ({
   title,
@@ -65,13 +66,13 @@ const WorkOverview = ({
       className="relative h-dvh w-screen z-5 flex flex-col justify-center items-center pb-8 px-4 lg:pr-8 gap-8"
     >
       <div className="relative w-full h-full flex flex-col lg:flex-row flex-1 items-center justify-center gap-8 pt-[90px] md:pt-[50px] lg:pt-[20px]">
-        <div className="w-full h-full rounded-lg">
+        <Link to={projectUrl} className="w-full h-full rounded-lg">
           <img
             src={image}
             alt={title}
             className="size-full rounded-lg object-cover"
           />
-        </div>
+        </Link>
 
         <div className="w-full lg:w-1/4 h-fit lg:h-full flex flex-row lg:flex-col justify-between items-start">
           <h3 className="text-white font-poppins font-extralight text-xs md:text-sm lg:text-base">
@@ -109,8 +110,8 @@ const WorkOverview = ({
             </p>
           )}
         </h2>
-        <a
-          href={`works/${projectUrl}`}
+        <Link
+          to={`/works/${projectUrl}`}
           className="text-primary hover:text-gray-300 transition-colors flex items-center justify-center gap-2 md:mb-4"
         >
           <p className="text-xs md:text-base text-nowrap">Explore Project</p>
@@ -119,7 +120,7 @@ const WorkOverview = ({
             alt="custom_arrow_icon"
             className="w-4 h-4 md:w-6 md:h-6"
           />
-        </a>
+        </Link>
       </div>
     </section>
   );
