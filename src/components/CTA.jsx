@@ -79,7 +79,7 @@ const CTA = () => {
           <a
             ref={firstTextRef}
             href="mailto:anwarsadat.d2@gmail.com"
-            className="uppercase font-bold whitespace-nowrap cursor-pointer transition-colors hover:text-gray-700
+            className="uppercase font-bold whitespace-nowrap cursor-pointer transition-colors 
                        text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-[120px] 2xl:text-[150px]"
             style={{ fontFamily: "Roboto Condensed, sans-serif" }}
           >
@@ -88,7 +88,7 @@ const CTA = () => {
           <a
             ref={secondTextRef}
             href="mailto:anwarsadat.d2@gmail.com"
-            className="uppercase font-bold whitespace-nowrap cursor-pointer transition-colors hover:text-gray-700 absolute
+            className="uppercase font-bold whitespace-nowrap cursor-pointer transition-colors  absolute
                        text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-[120px] 2xl:text-[150px]"
             style={{ fontFamily: "Roboto Condensed, sans-serif" }}
           >

@@ -1,3 +1,13 @@
+import { useRef } from "react";
+import { leftProject, rightProject } from "../utils/data";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register plugins
+gsap.registerPlugin(ScrollTrigger);
+
 const ProjectLink = ({ project, side = "left" }) => {
   return (
     <a
@@ -11,21 +21,83 @@ const ProjectLink = ({ project, side = "left" }) => {
 };
 
 const Hero = () => {
-  const leftProject = {
-    name: "Project Alpha",
-    image: "car9.jpg",
-    url: "/works/alpha",
-    description: "Web Application",
-    side: "left",
-  };
+  const firstTextRef = useRef(null);
+  const secondTextRef = useRef(null);
+  const thirdTextRef = useRef(null);
+  const leftContainerRef = useRef(null);
+  const rightContainerRef = useRef(null);
+  const footerRef = useRef(null);
 
-  const rightProject = {
-    name: "Project Beta",
-    image: "car10.jpg",
-    url: "/works/beta",
-    description: "Web Application",
-    side: "right",
-  };
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    const firstText = firstTextRef.current;
+    const secondText = secondTextRef.current;
+    const thirdText = thirdTextRef.current;
+    const leftContainer = leftContainerRef.current;
+    const rightContainer = rightContainerRef.current;
+    const footer = footerRef.current;
+
+    tl.from(firstText, {
+      y: 100,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    })
+      .from(
+        secondText,
+        {
+          y: 100,
+          opacity: 0,
+          scale: 0.8, // Add scale animation for the image
+          duration: 0.8,
+          ease: "back.out(3.0)", // Bouncy effect for the image
+        },
+        "-=0.3"
+      ) // Start slightly before previous animation ends
+      .from(
+        thirdText,
+        {
+          y: 100,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.3"
+      )
+      // Animate side projects
+      .from(
+        leftContainer,
+        {
+          x: -50,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power1.out",
+        },
+        "-=0.4"
+      )
+      .from(
+        rightContainer,
+        {
+          x: 50,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power1.out",
+        },
+        "-=0.5"
+      )
+      // Animate footer last
+      .from(
+        footer,
+        {
+          y: 50,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power1.out",
+        },
+        "-=0.3"
+      );
+  });
 
   const handleMouseEnter = (project) => {
     window.dispatchEvent(
@@ -57,7 +129,7 @@ const Hero = () => {
       >
         {/* Left */}
         <div
-          id="left"
+          ref={leftContainerRef}
           className="relative group"
           onMouseEnter={() => handleMouseEnter(leftProject)}
           onMouseLeave={() => handleMouseLeave(leftProject)}
@@ -67,28 +139,33 @@ const Hero = () => {
             <ProjectLink project={leftProject} side="left" />
           </div>
         </div>
+
         {/* Center */}
-        <div
-          id="center"
-          className="relative flex flex-col flex-1 h-full justify-center items-center overflow-hidden"
-        >
-          <p className="uppercase text-white font-black text-5xl md:text-7xl lg:text-[96px] leading-none tracking-tighter">
+        <div className="relative flex flex-col flex-1 h-full justify-center items-center overflow-hidden">
+          <p
+            ref={firstTextRef}
+            className="uppercase text-white font-black text-5xl md:text-7xl lg:text-[96px] leading-none tracking-tighter"
+          >
             intuitive
           </p>
-          <div className="px-3">
+          <div ref={secondTextRef} className="px-3">
             <img
               src="/mini.png"
               alt="minimalisitc"
               className="w-96 md:w-[480px] lg:w-full"
             />
           </div>
-          <p className="uppercase text-white font-black text-5xl md:text-7xl lg:text-[96px] tracking-tighter leading-none">
+          <p
+            ref={thirdTextRef}
+            className="uppercase text-white font-black text-5xl md:text-7xl lg:text-[96px] tracking-tighter leading-none"
+          >
             ui design
           </p>
         </div>
+
         {/* Right */}
         <div
-          id="right"
+          ref={rightContainerRef}
           className="relative group"
           onMouseEnter={() => handleMouseEnter(rightProject)}
           onMouseLeave={() => handleMouseLeave(rightProject)}
@@ -99,9 +176,10 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
       {/* Footer */}
       <div
-        id="hero-footer"
+        ref={footerRef}
         className="absolute bottom-2 w-full h-fit flex flex-shrink-0 items-center justify-between py-6 px-4 md:p-8"
       >
         <div>

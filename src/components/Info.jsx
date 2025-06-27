@@ -1,6 +1,71 @@
-import React from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
+import { useWindowSize } from "react-use";
 
+gsap.registerPlugin(ScrollTrigger);
 const Info = () => {
+  // Create separate refs for each animated element
+  const figmaRef = useRef(null);
+  const framerRef = useRef(null);
+  const fullstackRef = useRef(null);
+  const cicdRef = useRef(null);
+  const cloudRef = useRef(null);
+  const testingRef = useRef(null);
+
+  const { width } = useWindowSize();
+
+  useGSAP(() => {
+    // Array of all refs to animate
+    const refs = [
+      figmaRef,
+      framerRef,
+      fullstackRef,
+      cicdRef,
+      cloudRef,
+      testingRef,
+    ];
+
+    // Define different animation values based on screen size
+    const getAnimationValues = () => {
+      if (width >= 1024) {
+        // lg and above
+        return { x: 120, duration: 0.8 };
+      } else if (width >= 768) {
+        // md
+        return { x: 80, duration: 0.7 };
+      } else {
+        // sm and below
+        return { x: 40, duration: 0.6 };
+      }
+    };
+
+    const { x: initialX, duration } = getAnimationValues();
+
+    refs.forEach((ref) => {
+      const element = ref.current;
+      if (!element) return;
+
+      // Set initial state based on screen size
+      gsap.set(element, { x: initialX, opacity: 0 });
+
+      // Create animation with ScrollTrigger
+      gsap.to(element, {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: element,
+          start: "top 85%",
+          end: "bottom 15%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+  }, [width]);
+
   return (
     <>
       <div className="relative h-full w-screen bg-900 z-5 pb-[100px] pt-[200px] ps-4 pe-10 md:ps-8 md:pe-32">
@@ -12,7 +77,10 @@ const Info = () => {
           </div>
 
           <div className="relative flex flex-col w-3/4 justify-start items-center gap-20">
-            <div className="relative w-full flex flex-col justify-start items-start gap-6">
+            <div
+              ref={figmaRef}
+              className="relative w-full flex flex-col justify-start items-start gap-6"
+            >
               <h2 className="text-white text-2xl md:text-5xl font-bold">
                 Web Design with <span className="text-primary">Figma</span>
               </h2>
@@ -25,7 +93,11 @@ const Info = () => {
                 seamless experience.
               </p>
             </div>
-            <div className="relative w-full flex flex-col justify-start items-start gap-6">
+
+            <div
+              ref={framerRef}
+              className="relative w-full flex flex-col justify-start items-start gap-6"
+            >
               <h2 className="text-white text-3xl md:text-5xl font-bold">
                 Rapid Prototyping with{" "}
                 <span className="text-primary">Framer</span>
@@ -51,7 +123,10 @@ const Info = () => {
           </div>
 
           <div className="relative flex flex-col w-3/4 justify-start items-center gap-20">
-            <div className="relative w-full flex flex-col justify-start items-start gap-6">
+            <div
+              ref={fullstackRef}
+              className="relative w-full flex flex-col justify-start items-start gap-6"
+            >
               <h2 className="text-white text-3xl md:text-5xl font-bold">
                 <span className="text-primary">Full-stack</span> Development
               </h2>
@@ -64,7 +139,11 @@ const Info = () => {
                 frontend UI to backend logic.
               </p>
             </div>
-            <div className="relative w-full flex flex-col justify-start items-start gap-6">
+
+            <div
+              ref={cicdRef}
+              className="relative w-full flex flex-col justify-start items-start gap-6"
+            >
               <h2 className="text-white text-3xl md:text-5xl font-bold">
                 Version Control
                 <span className="text-primary"> &</span> CI/CD
@@ -90,7 +169,10 @@ const Info = () => {
           </div>
 
           <div className="relative flex flex-col w-3/4 justify-start items-center gap-20">
-            <div className="relative w-full flex flex-col justify-start items-start gap-6">
+            <div
+              ref={cloudRef}
+              className="relative w-full flex flex-col justify-start items-start gap-6"
+            >
               <h2 className="text-primary text-3xl md:text-5xl font-bold text-nowrap">
                 Cloud & DevOps
               </h2>
@@ -102,7 +184,11 @@ const Info = () => {
                 variable management.
               </p>
             </div>
-            <div className="relative w-full flex flex-col justify-start items-start gap-6">
+
+            <div
+              ref={testingRef}
+              className="relative w-full flex flex-col justify-start items-start gap-6"
+            >
               <h2 className="text-white text-3xl md:text-5xl font-bold">
                 Testing & Debugging
               </h2>
