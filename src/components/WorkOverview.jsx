@@ -63,9 +63,9 @@ const WorkOverview = ({
   return (
     <section
       ref={ref}
-      className="relative h-dvh w-screen z-5 flex flex-col justify-center items-center pb-8 px-4 lg:pr-8 gap-8"
+      className="relative h-dvh w-screen z-5 flex flex-col justify-center items-center pb-8 px-4 lg:pr-8 gap-8 lg:gap-2"
     >
-      <div className="relative w-full h-full flex flex-col lg:flex-row flex-1 items-center justify-center gap-8 pt-[90px] md:pt-[50px] lg:pt-[20px]">
+      <div className="relative w-full h-full flex flex-col lg:flex-row flex-1 items-center justify-center gap-8 pt-[90px] md:pt-[50px] lg:pt-[70px]">
         <Link to={projectUrl} className="w-full h-full rounded-lg">
           <img
             src={image}
@@ -99,7 +99,7 @@ const WorkOverview = ({
       {/* Footer */}
       <div
         ref={footerRef}
-        className="relative w-full h-fit flex items-end justify-between pt-4 gap-2 md:gap-8"
+        className="relative w-full h-fit flex items-end justify-between pt-0 gap-2 md:gap-8"
       >
         <h2 className="text-white font-poppins text-3xl md:text-7xl lg:text-8xl leading-none h-fit">
           {title}

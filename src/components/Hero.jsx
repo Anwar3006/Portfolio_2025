@@ -51,8 +51,8 @@ const Hero = () => {
           y: 100,
           opacity: 0,
           scale: 0.8, // Add scale animation for the image
-          duration: 0.8,
-          ease: "back.out(3.0)", // Bouncy effect for the image
+          duration: 1,
+          ease: "back.out(1.5)", // Bouncy effect for the image
         },
         "-=0.3"
       ) // Start slightly before previous animation ends
