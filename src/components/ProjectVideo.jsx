@@ -38,6 +38,7 @@ const ProjectVideo = () => {
           loop
           muted
           autoPlay
+          playsInline
           className="w-full h-full object-cover"
         />
       </div>
