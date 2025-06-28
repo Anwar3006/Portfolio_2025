@@ -4,15 +4,24 @@ const About = () => {
   return (
     <div
       id="about"
-      className="sticky top-0 left-0  bg-black z-4  w-full h-screen min-h-[700px]"
+      data-scroll-section // Lenis identifier
+      className="sticky top-0 left-0  bg-black z-4  w-full h-screen min-h-[700px] md:mb-[100px]"
     >
       <div className="flex w-full h-full">
         {/* Left side - Image container */}
-        <div className="w-1/2 h-full">
+        <div
+          data-scroll
+          data-scroll-speed="0.5" // Parallax effect
+          className="w-1/2 h-full"
+        >
           <img src="chat1.jpg" alt="" className="w-full h-full object-cover" />
         </div>
         {/* Right side - Text container */}
-        <div className="w-1/2 h-full flex flex-col justify-center items-center px-4 lg:px-16 my-10">
+        <div
+          data-scroll
+          data-scroll-speed="0.8" // Slightly different speed for parallax
+          className="w-1/2 h-full flex flex-col justify-center items-center px-4 lg:px-16 my-10"
+        >
           {/* Top text with carousel effect placeholder */}
           <div className="mb-8 flex items-start justify-start w-full max-w-md">
             <p className="text-white text-xs md:text-base lg:text-lg font-poppins tracking-widest">
