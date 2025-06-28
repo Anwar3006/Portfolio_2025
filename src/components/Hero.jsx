@@ -123,7 +123,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative md:sticky w-screen h-[90vh] md:h-screen min-h-[700px] flex flex-col z-10">
+    <div className="relative md:sticky md:top-0 w-screen h-[90vh] md:h-screen min-h-[700px] flex flex-col z-2">
       <div
         id="horizontalGroup"
         className="flex flex-1 w-full flex-row items-center justify-center gap-0 overflow-visible"
