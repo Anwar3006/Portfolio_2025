@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div
       id="about"
-      className="sticky top-0 left-0  bg-black z-4  w-full h-screen min-h-[700px] overflow-visible md:mb-[300px]"
+      className="sticky top-0 left-0  bg-black z-4  w-full h-screen min-h-[700px]"
     >
       <div className="flex w-full h-full">
         {/* Left side - Image container */}
@@ -63,7 +63,7 @@ const About = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-[700px] overflow-hidden" />
+      {/* <div className="w-full h-[700px] overflow-hidden" /> */}
     </div>
   );
 };
