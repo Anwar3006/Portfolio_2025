@@ -68,7 +68,7 @@ const Info = () => {
 
   return (
     <>
-      <div className="relative h-full w-screen bg-900 z-5 pb-[100px] pt-[200px] ps-4 pe-10 md:ps-8 md:pe-32">
+      <div className="sticky md:relative h-full w-screen bg-900 z-5 pb-[100px] pt-[200px] ps-4 pe-10 md:ps-8 md:pe-32">
         <div className="flex items-start justify-start gap-4 ">
           <div className="flex-shrink-0 w-1/4 h-[70vh]">
             <p className="text-white sticky top-[200px] left-0 text-xs md:text-base">

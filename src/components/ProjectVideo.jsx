@@ -31,7 +31,7 @@ const ProjectVideo = () => {
   });
 
   return (
-    <div className="relative w-full h-screen bg-900 z-5 min-h-[700px] overflow-hidden flex items-center justify-center">
+    <div className="sticky md:relative w-full h-screen bg-900 z-5 min-h-[700px] overflow-hidden flex items-center justify-center">
       <div ref={videoRef} className="relative w-full h-full">
         <video
           src="hero-1.mp4"

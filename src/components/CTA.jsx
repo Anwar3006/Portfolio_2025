@@ -71,7 +71,7 @@ const CTA = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-screen bg-white flex flex-col overflow-hidden"
+      className="sticky md:relative w-full min-h-screen bg-white flex flex-col overflow-hidden"
       style={{ zIndex: 5 }}
     >
       {/* Main content area */}
