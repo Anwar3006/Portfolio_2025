@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { HashRouter, Route, Routes } from "react-router";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router";
 import CustomCursor from "./components/CustomCursor";
 
 const HomePage = lazy(() => import("./pages/Home"));
@@ -9,7 +9,7 @@ const ContactPage = lazy(() => import("./pages/Contact"));
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <CustomCursor />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
@@ -19,7 +19,7 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Suspense>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

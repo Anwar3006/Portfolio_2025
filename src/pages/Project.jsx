@@ -20,8 +20,8 @@ const projectTwoMedia = [
 
 const Project = () => {
   const location = useLocation();
-  // const projectSlug = location.pathname.split("/")[2]; //when using BrowserRouter
-  const projectSlug = location.hash.split("/")[2]; //when using HashRouter
+  const projectSlug = location.pathname.split("/")[2]; //when using BrowserRouter
+  // const projectSlug = location.hash.split("/")[2]; //when using HashRouter
 
   const renderSingleProject = (slug) => {
     switch (slug) {
