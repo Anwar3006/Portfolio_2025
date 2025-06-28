@@ -65,28 +65,31 @@ const WorkOverview = ({
       ref={ref}
       className="relative h-dvh w-screen z-5 flex flex-col justify-center items-center pb-8 px-4 lg:pr-8 gap-8 lg:gap-2"
     >
-      <div className="relative w-full h-full flex flex-col lg:flex-row flex-1 items-center justify-center gap-8 pt-[90px] md:pt-[50px] lg:pt-[70px]">
+      <div className="relative w-full h-full flex flex-col lg:flex-row flex-1 items-center justify-center gap-8 pt-[90px] md:pt-[50px] lg:pt-[40px]">
         <Link to={projectUrl} className="w-full h-full rounded-lg">
           <img
             src={image}
             alt={title}
-            className="size-full rounded-lg object-cover"
+            className="size-full md:w-full md:h-[80vh] lg:h-[83vh] rounded-lg object-cover"
           />
         </Link>
 
-        <div className="w-full lg:w-1/4 h-fit lg:h-full flex flex-row lg:flex-col justify-between items-start">
-          <h3 className="text-white font-poppins font-extralight text-xs md:text-sm lg:text-base">
-            {format(date, "PPP")}
-          </h3>
+        <div className="absolute bottom-1 px-2 w-full py-2 h-fit flex flex-row justify-between items-end">
+          <div className="flex items-center justify-start h-full gap-2 w-fit border border-900 px-2 py-1 rounded-full bg-black/90 backdrop-blur-sm">
+            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+            <h3 className=" text-white font-poppins font-extralight text-xs">
+              {format(date, "PPP")}
+            </h3>
+          </div>
 
           <ul
             ref={techStackRef}
-            className="text-400 font-poppins font-light text-xs md:text-sm lg:text-base grid grid-cols-2 gap-2 md:flex md:gap-4 lg:grid lg:grid-cols-1 lg:gap-2"
+            className="text-white font-poppins font-light text-xs flex items-center justify-end gap-0.5 md:gap-2 flex-wrap w-2/3"
           >
             {techStack.map((tech, index) => (
               <li
                 key={index}
-                className="flex items-center gap-1 w-fit border border-400 px-2 py-1 md:px-3 md:py-2 rounded-full"
+                className="flex items-center gap-x-3 w-fit border border-900 px-2 py-1 rounded-full bg-black/90 backdrop-blur-sm"
               >
                 <img src={tech.icon} alt={tech.name} className="w-6 h-6" />
                 {tech.name}

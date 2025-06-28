@@ -50,7 +50,7 @@ const Works = () => {
     });
   });
   return (
-    <div className="flex flex-col justify-start items-center bg-800">
+    <div className="flex flex-col min-h-screen bg-800">
       <Navbar />
       <div className="flex flex-col items-center justify-center gap-12 md:gap-36">
         <WorkOverview
