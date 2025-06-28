@@ -5,7 +5,7 @@ const About = () => {
     <div
       id="about"
       data-scroll-section // Lenis identifier
-      className="sticky top-0 left-0  bg-black z-4  w-full h-screen min-h-[700px] md:mb-[100px]"
+      className="relative bg-black z-4  w-full h-screen min-h-[700px]"
     >
       <div className="flex w-full h-full">
         {/* Left side - Image container */}
