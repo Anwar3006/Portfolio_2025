@@ -60,6 +60,14 @@ const WorkOverview = ({
     ); // Start 0.2 seconds before footer animation ends
   });
 
+  const handleMouseEnter = () => {
+    window.dispatchEvent(new CustomEvent("enter-explore-project"));
+  };
+
+  const handleMouseLeave = () => {
+    window.dispatchEvent(new CustomEvent("leave-explore-project"));
+  };
+
   return (
     <section
       ref={ref}
@@ -70,6 +78,8 @@ const WorkOverview = ({
           <img
             src={image}
             alt={title}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             className="size-full md:w-full md:h-[80vh] lg:h-[83vh] rounded-lg object-cover"
           />
         </Link>
