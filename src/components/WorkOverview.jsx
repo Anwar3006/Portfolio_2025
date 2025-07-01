@@ -3,6 +3,10 @@ import { format } from "date-fns";
 import gsap from "gsap";
 import { useRef } from "react";
 import { Link } from "react-router";
+import {
+  handleMouseEnterLink,
+  handleMouseLeaveLink,
+} from "../utils/eventDispatcher";
 
 const WorkOverview = ({
   title,
@@ -73,13 +77,15 @@ const WorkOverview = ({
       ref={ref}
       className="relative h-dvh w-screen z-5 flex flex-col justify-center items-center pb-8 px-4 lg:pr-8 gap-8 lg:gap-2"
     >
-      <div className="relative w-full h-full flex flex-col lg:flex-row flex-1 items-center justify-center gap-8 pt-[90px] md:pt-[50px] lg:pt-[40px]">
+      <div
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className="relative w-full h-full flex flex-col lg:flex-row flex-1 items-center justify-center gap-8 pt-[90px] md:pt-[50px] lg:pt-[40px]"
+      >
         <Link to={projectUrl} className="w-full h-full rounded-lg">
           <img
             src={image}
             alt={title}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             className="size-full md:w-full md:h-[80vh] lg:h-[83vh] rounded-lg object-cover"
           />
         </Link>
@@ -125,6 +131,8 @@ const WorkOverview = ({
         </h2>
         <Link
           to={`/works/${projectUrl}`}
+          onMouseEnter={handleMouseEnterLink}
+          onMouseLeave={handleMouseLeaveLink}
           className="text-primary hover:text-gray-300 transition-colors flex items-center justify-center gap-2 md:mb-4"
         >
           <p className="text-xs md:text-base text-nowrap">Explore Project</p>

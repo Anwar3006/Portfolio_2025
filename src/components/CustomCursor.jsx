@@ -40,17 +40,17 @@ const CustomCursor = () => {
       borderRadius: 8,
     },
     "project-explore": {
-      x: x - 60,
+      x: x - 100,
       y: y - 60,
-      width: 120,
-      height: 120,
+      width: 180,
+      height: 180,
       borderRadius: "50%",
     },
     link: {
-      x: x - 20,
-      y: y - 20,
-      width: 40,
-      height: 40,
+      x: x - 30,
+      y: y - 30,
+      width: 60,
+      height: 60,
       borderRadius: "50%",
     },
   };
@@ -130,6 +130,17 @@ const CustomCursor = () => {
       }));
     };
 
+    const handleCursorReset = () => {
+      setCursorState({
+        isHovered: false,
+        isProjectHovered: false,
+        isLinkHovered: false,
+        projectImage: null,
+        projectName: null,
+        projectSide: "left",
+      });
+    };
+
     // Event listeners
     window.addEventListener("cursor-enter-project", handleCursorEnterProject);
     window.addEventListener("cursor-leave-project", handleCursorLeaveProject);
@@ -143,8 +154,19 @@ const CustomCursor = () => {
     );
     window.addEventListener("cursor-enter-link", handleCursorEnterLink);
     window.addEventListener("cursor-leave-link", handleCursorLeaveLink);
+    window.addEventListener("cursor-reset", handleCursorReset);
 
     return () => {
+      // Reset cursor state when component unmounts
+      setCursorState({
+        isHovered: false,
+        isProjectHovered: false,
+        isLinkHovered: false,
+        projectImage: null,
+        projectName: null,
+        projectSide: "left",
+      });
+
       window.removeEventListener(
         "cursor-enter-project",
         handleCursorEnterProject

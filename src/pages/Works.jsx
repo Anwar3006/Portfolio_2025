@@ -7,8 +7,9 @@ import Navbar from "../components/Navbar";
 import WorkOverview from "../components/WorkOverview";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { useLocation } from "react-router";
 
 gsap.registerPlugin(ScrollTrigger);
 const Works = () => {
@@ -16,6 +17,13 @@ const Works = () => {
   const secondWorkRef = useRef(null);
   const thirdWorkRef = useRef(null);
   const techStacksRef = useRef(null);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Dispatch a reset event when route changes
+    window.dispatchEvent(new CustomEvent("cursor-reset"));
+  }, [location.pathname]);
 
   useGSAP(() => {
     const firstWork = firstWorkRef.current;

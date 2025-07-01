@@ -4,6 +4,7 @@ import SingleProject from "../components/SingleProject";
 import { useLocation } from "react-use";
 import { projectTwoStacks, projectZentryStacks } from "../utils/data";
 import { Link } from "react-router";
+import { useEffect } from "react";
 
 const zentryCloneMedia = [
   "/zentry-clone/zentry-clone-wf.png",
@@ -22,6 +23,11 @@ const Project = () => {
   const location = useLocation();
   const projectSlug = location.pathname.split("/")[2]; //when using BrowserRouter
   // const projectSlug = location.hash.split("/")[2]; //when using HashRouter
+
+  useEffect(() => {
+    // Dispatch a reset event when route changes
+    window.dispatchEvent(new CustomEvent("cursor-reset"));
+  }, [location.pathname]);
 
   const renderSingleProject = (slug) => {
     switch (slug) {

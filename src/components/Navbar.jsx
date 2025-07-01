@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
+import {
+  handleMouseEnterLink,
+  handleMouseLeaveLink,
+} from "../utils/eventDispatcher";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState("");
@@ -47,6 +51,9 @@ const Navbar = () => {
       {/* Logo */}
       <Link
         to="/"
+        onMouseEnter={handleMouseEnterLink}
+        onMouseLeave={handleMouseLeaveLink}
+        onClick={() => window.location.reload()}
         className="inline-block bg-white rounded-full hover:bg-gray-200 transition-colors duration-200"
       >
         <span className="block text-black uppercase leading-[1.2] py-2 md:py-3 px-2 md:px-4 text-xs md:text-base font-medium">
@@ -59,6 +66,8 @@ const Navbar = () => {
       <div className="bg-white rounded-full flex items-center justify-center">
         <button
           onClick={handleAboutClick}
+          onMouseEnter={handleMouseEnterLink}
+          onMouseLeave={handleMouseLeaveLink}
           className="text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200 rounded-l-full ps-2 md:ps-4"
         >
           about
@@ -68,6 +77,8 @@ const Navbar = () => {
         <Link
           to="/works"
           onClick={() => handleNavigation("/works")}
+          onMouseEnter={handleMouseEnterLink}
+          onMouseLeave={handleMouseLeaveLink}
           className="text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200"
         >
           works
@@ -76,6 +87,8 @@ const Navbar = () => {
 
         <Link
           to="/contact"
+          onMouseEnter={handleMouseEnterLink}
+          onMouseLeave={handleMouseLeaveLink}
           className="text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200 pe-2 md:pe-4 rounded-r-full"
         >
           contact

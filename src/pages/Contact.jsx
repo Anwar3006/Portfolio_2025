@@ -1,5 +1,9 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import {
+  handleMouseEnterLink,
+  handleMouseLeaveLink,
+} from "../utils/eventDispatcher";
 
 const Contact = () => {
   return (
@@ -8,6 +12,8 @@ const Contact = () => {
 
       <div className="flex items-center justify-center w-full h-full">
         <a
+          onMouseEnter={handleMouseEnterLink}
+          onMouseLeave={handleMouseLeaveLink}
           href="mailto:anwarsadat.d2@gmail.com"
           className="font-bold text-7xl md:text-[140px] lg:text-[220px]"
         >
@@ -27,6 +33,8 @@ const Contact = () => {
           <a
             href="mailto:anwarsadat.d2@gmail.com"
             className="font-extralight text-xs md:text-sm"
+            onMouseEnter={handleMouseEnterLink}
+            onMouseLeave={handleMouseLeaveLink}
           >
             anwarsadat.d2@gmail.com
           </a>
