@@ -34,7 +34,7 @@ export const animatePageOut = (containerRef) => {
 
     tl.set(columns, { yPercent: -100 }).to(columns, {
       yPercent: 0,
-      duration: 0.8,
+      duration: 0.4,
       ease: "power4.out",
       stagger: {
         amount: 0.3,
