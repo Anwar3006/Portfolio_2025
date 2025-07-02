@@ -12,7 +12,8 @@ import { useGSAP } from "@gsap/react";
 import { useLocation } from "react-router";
 
 gsap.registerPlugin(ScrollTrigger);
-const Works = () => {
+
+const Works = ({ transitionRef }) => {
   const firstWorkRef = useRef(null);
   const secondWorkRef = useRef(null);
   const thirdWorkRef = useRef(null);
@@ -57,9 +58,10 @@ const Works = () => {
       },
     });
   });
+
   return (
     <div className="flex flex-col min-h-screen bg-800">
-      <Navbar />
+      <Navbar transitionRef={transitionRef} />
       <div className="flex flex-col items-center justify-center gap-12 md:gap-36">
         <WorkOverview
           ref={firstWorkRef}

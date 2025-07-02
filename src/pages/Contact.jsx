@@ -5,10 +5,10 @@ import {
   handleMouseLeaveLink,
 } from "../utils/eventDispatcher";
 
-const Contact = () => {
+const Contact = ({ transitionRef }) => {
   return (
     <section className="relative h-dvh w-screen z-5 flex flex-col items-center justify-between bg-white">
-      <Navbar />
+      <Navbar transitionRef={transitionRef} />
 
       <div className="flex items-center justify-center w-full h-full">
         <a

@@ -19,7 +19,7 @@ const projectTwoMedia = [
   "/placeholder/p1-gif.jpg",
 ];
 
-const Project = () => {
+const Project = ({ transitionRef }) => {
   const location = useLocation();
   const projectSlug = location.pathname.split("/")[2]; //when using BrowserRouter
   // const projectSlug = location.hash.split("/")[2]; //when using HashRouter
@@ -72,9 +72,10 @@ const Project = () => {
         );
     }
   };
+
   return (
     <section className="relative bg-800 flex flex-col items-center justify-start gap-8">
-      <Navbar />
+      <Navbar transitionRef={transitionRef} />
 
       {renderSingleProject(projectSlug)}
     </section>

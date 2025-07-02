@@ -188,7 +188,7 @@ const Hero = () => {
             @Curiousfellow
           </p>
         </div>
-        <div>
+        <div className="md:flex items-center text-primary font-light hidden md:text-sm">
           <p>Explore Projects</p>
         </div>
         <div>
