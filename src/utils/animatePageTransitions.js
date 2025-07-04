@@ -20,7 +20,6 @@ export const animatePageIn = (containerRef) => {
 };
 
 export const animatePageOut = (containerRef) => {
-  console.log("Animating page out...");
   return new Promise((resolve) => {
     const container = containerRef.current;
     if (!container) {

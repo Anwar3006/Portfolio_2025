@@ -12,11 +12,10 @@ const zentryCloneMedia = [
   "/zentry-clone/zentry-clone-live.mp4",
 ];
 
-const projectTwoMedia = [
-  "/placeholder/p1-1.jpg",
-  "/placeholder/p1-2.jpg",
-  "/placeholder/p1-3.jpg",
-  "/placeholder/p1-gif.jpg",
+const minimalistWatchMedia = [
+  "/minimalist_watch/watch_code.png",
+  "/minimalist_watch/watch_phone.mp4",
+  "/minimalist_watch/watch_laptop.mp4",
 ];
 
 const Project = ({ transitionRef }) => {
@@ -43,12 +42,13 @@ const Project = ({ transitionRef }) => {
           />
         );
 
-      case "project-2":
+      case "minimalist_watch":
         return (
           <SingleProject
-            title="Project #2"
+            title="Minimalist Watch Store"
+            subtitle="(Landing Page)"
             techStack={projectTwoStacks}
-            media={projectTwoMedia}
+            media={minimalistWatchMedia}
             nextProjectTitle="Project #3"
             nextProjectUrl="/works/project-3"
           />

@@ -17,7 +17,6 @@ const Works = ({ transitionRef }) => {
   const firstWorkRef = useRef(null);
   const secondWorkRef = useRef(null);
   const thirdWorkRef = useRef(null);
-  const techStacksRef = useRef(null);
 
   const location = useLocation();
 
@@ -74,11 +73,12 @@ const Works = ({ transitionRef }) => {
         />
         <WorkOverview
           ref={secondWorkRef}
-          title="Project #2"
-          image="/images/p2-gif.jpg"
-          date={Date.now()}
+          title="Minimalist Watch Store"
+          subtitle="(Landing Page)"
+          image="/minimalist_watch/watch_work.png"
+          date={new Date("2024-01-01")}
           techStack={projectTwoStacks}
-          projectUrl="project-2"
+          projectUrl="minimalist_watch"
         />
         <WorkOverview
           ref={thirdWorkRef}

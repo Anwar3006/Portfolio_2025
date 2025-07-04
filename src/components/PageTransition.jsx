@@ -15,7 +15,7 @@ const PageTransition = ({ transitionRef }) => {
   return (
     <section
       ref={transitionRef}
-      className="w-screen h-dvh fixed top-0 left-0 pointer-events-none z-20 flex"
+      className="w-screen h-dvh fixed top-0 left-0 pointer-events-none z-40 flex"
     >
       {[...Array(noOfColumns)].map((_, i) => (
         <div key={i} className="bg-primary flex-1 w-full h-full relative" />
