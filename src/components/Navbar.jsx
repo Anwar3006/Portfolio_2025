@@ -23,6 +23,7 @@ const Navbar = ({ transitionRef }) => {
     try {
       await animatePageOut(transitionRef);
       navigate(href);
+      console.log("After animation, navigating to:", href);
 
       // Scroll to top after navigation
       setTimeout(() => {

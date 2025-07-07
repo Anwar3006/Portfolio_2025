@@ -1,4 +1,4 @@
-import React from "react";
+import OptimizedMedia from "./OptimizedMedia";
 
 const About = () => {
   return (
@@ -14,8 +14,13 @@ const About = () => {
           data-scroll-speed="0.5" // Parallax effect
           className="w-1/2 h-full"
         >
-          <img src="chat1.jpg" alt="" className="w-full h-full object-cover" />
+          <OptimizedMedia
+            src="homePage/about_section.jpg"
+            alt="my_picture"
+            className="w-full h-full"
+          />
         </div>
+
         {/* Right side - Text container */}
         <div
           data-scroll

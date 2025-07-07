@@ -5,6 +5,10 @@ import gsap from "gsap";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router";
+import {
+  handleMouseEnterLink,
+  handleMouseLeaveLink,
+} from "../utils/eventDispatcher";
 
 // Register plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -188,9 +192,14 @@ const Hero = () => {
             @Curiousfellow
           </p>
         </div>
-        <div className="md:flex items-center text-primary font-light hidden md:text-sm">
+        <Link
+          to={"/projects"}
+          onMouseEnter={handleMouseEnterLink}
+          onMouseLeave={handleMouseLeaveLink}
+          className="md:flex items-center text-primary font-light hidden md:text-sm"
+        >
           <p>Explore Projects</p>
-        </div>
+        </Link>
         <div>
           <a
             href="mailto:anwarsadat.d2@gmail.com"

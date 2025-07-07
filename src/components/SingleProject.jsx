@@ -1,4 +1,7 @@
 import { Link, useNavigate } from "react-router";
+import ProjectPills from "./ProjectPill";
+
+import OptimizedMedia from "./OptimizedMedia";
 
 // Component
 const SingleProject = ({
@@ -6,6 +9,8 @@ const SingleProject = ({
   subtitle,
   techStack = [],
   media = [],
+  githubUrl,
+  websiteUrl,
   nextProjectTitle,
   nextProjectHref,
 }) => {
@@ -21,7 +26,7 @@ const SingleProject = ({
   return (
     <div className="w-screen h-dvh mt-16 md:mt-32">
       {/* Section Header */}
-      <div className="p-4 md:p-8 flex items-center w-screen justify-between">
+      <div className="px-4 pt-4 pb-2 md:px-8 md:pt-8 flex items-center w-screen justify-between">
         <h2 className="text-white font-poppins text-2xl md:text-5xl lg:text-6xl">
           {title}
           {subtitle && (
@@ -41,30 +46,23 @@ const SingleProject = ({
         </ul>
       </div>
 
+      <div className="w-full px-4 md:px-8">
+        <ProjectPills githubUrl={githubUrl} websiteUrl={websiteUrl} />
+      </div>
+
       {/* Section Content */}
       <div className="flex flex-col items-center justify-between gap-8 md:gap-16 mb-12 p-4 md:p-8">
-        {media.length >= 1 &&
+        {/* Show media when loaded and available */}
+        {media &&
+          media.length > 0 &&
           media.map((med, index) => {
-            const extension = med.split(".").pop().toLowerCase(); // Get last part and make lowercase
-
             return (
               <div key={index} className="w-full h-full rounded-lg">
-                {extension === "mp4" ? (
-                  <video
-                    src={med}
-                    className="size-full rounded-lg object-cover"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                ) : (
-                  <img
-                    src={med}
-                    alt={`${title} - media ${index + 1}`}
-                    className="size-full rounded-lg object-cover"
-                  />
-                )}
+                <OptimizedMedia
+                  src={med}
+                  alt={`${title} - media ${index + 1}`}
+                  className="size-full rounded-lg object-cover"
+                />
               </div>
             );
           })}

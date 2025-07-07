@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { useNavigate } from "react-router";
 
 export const animatePageIn = (containerRef) => {
+  console.log("Animating page in");
   const container = containerRef.current;
   if (!container) return;
 
@@ -40,6 +41,7 @@ export const animatePageOut = (containerRef) => {
         from: "end",
       },
       onComplete: () => {
+        console.log("Animating page out");
         resolve(); // Animation complete
       },
     });

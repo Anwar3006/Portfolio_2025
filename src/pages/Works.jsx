@@ -86,7 +86,7 @@ const Works = ({ transitionRef }) => {
           image="/images/p2-gif.jpg"
           date={Date.now()}
           techStack={projectThreeStacks}
-          projectUrl="project-3"
+          projectUrl="minimalist"
         />
       </div>
     </div>

@@ -32,6 +32,11 @@ const App = () => {
           smoothTouch: false,
           touchMultiplier: 2,
           autoResize: true,
+          // Add these options to help with stability
+          syncTouch: false,
+          touchInertiaMultiplier: 35,
+          wheelMultiplier: 1,
+          infinite: false,
         }}
       >
         <PageTransition transitionRef={transitionRef} />
