@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import {
   handleMouseEnterLink,
@@ -7,16 +7,26 @@ import {
 import { animatePageOut } from "../utils/animatePageTransitions";
 
 const Navbar = ({ transitionRef }) => {
-  const [isActive, setIsActive] = useState("");
   const [isAnimating, setIsAnimating] = useState(false); // Prevent multiple animations
-
   const location = useLocation();
+  const [activeLink, setActiveLink] = useState(location.pathname);
   const navigate = useNavigate();
+
+  //handle isActive for links
+  useEffect(() => {
+    setActiveLink(location.pathname);
+  }, [location.pathname]);
 
   // Handle page transition with animation
   const handleNavigationTransition = async (href) => {
     // Prevent multiple animations
     if (isAnimating) return;
+
+    // Check if we're already on the target page
+    if (location.pathname === href) {
+      console.log("Already on this page, skipping animation");
+      return;
+    }
 
     setIsAnimating(true);
 
@@ -48,6 +58,7 @@ const Navbar = ({ transitionRef }) => {
       // We're on home page, just scroll to about section
       const aboutSection = document.getElementById("about");
       if (aboutSection) {
+        setActiveLink("/about");
         aboutSection.scrollIntoView({
           behavior: "smooth",
           block: "start",
@@ -86,6 +97,7 @@ const Navbar = ({ transitionRef }) => {
     if (isAnimating) return;
 
     if (location.pathname === "/") {
+      setIsActive(true);
       window.location.reload();
     } else {
       await handleNavigationTransition("/");
@@ -100,9 +112,9 @@ const Navbar = ({ transitionRef }) => {
         onMouseEnter={handleMouseEnterLink}
         onMouseLeave={handleMouseLeaveLink}
         disabled={isAnimating}
-        className={`inline-block bg-white rounded-full hover:bg-gray-200 transition-colors duration-200 ${
-          isAnimating ? "opacity-50 cursor-not-allowed" : ""
-        }`}
+        className={`inline-block  rounded-full hover:bg-gray-200 transition-colors duration-200 ${
+          activeLink === "/" ? "bg-gray-300 underline" : "bg-white"
+        } ${isAnimating ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         <span className="block text-black uppercase leading-[1.2] py-2 md:py-3 px-2 md:px-4 text-xs md:text-base font-medium">
           <span className="hidden md:inline">mohammed</span>
@@ -111,13 +123,15 @@ const Navbar = ({ transitionRef }) => {
       </button>
 
       {/* Links */}
-      <div className="bg-white rounded-full flex items-center justify-center">
+      <div className={`bg-white rounded-full flex items-center justify-center`}>
         <button
           onClick={handleAboutClick}
           onMouseEnter={handleMouseEnterLink}
           onMouseLeave={handleMouseLeaveLink}
           disabled={isAnimating}
-          className={`text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200 rounded-l-full ps-2 md:ps-4 ${
+          className={`${
+            activeLink === "/about" ? "bg-gray-300 underline" : "bg-white"
+          } text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200 rounded-l-full ps-2 md:ps-4 ${
             isAnimating ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
@@ -130,7 +144,9 @@ const Navbar = ({ transitionRef }) => {
           onMouseEnter={handleMouseEnterLink}
           onMouseLeave={handleMouseLeaveLink}
           disabled={isAnimating}
-          className={`text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200 ${
+          className={`${
+            activeLink === "/works" ? "bg-gray-300 underline" : "bg-white"
+          } text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200 ${
             isAnimating ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
@@ -143,7 +159,9 @@ const Navbar = ({ transitionRef }) => {
           onMouseEnter={handleMouseEnterLink}
           onMouseLeave={handleMouseLeaveLink}
           disabled={isAnimating}
-          className={`text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200 pe-2 md:pe-4 rounded-r-full ${
+          className={`${
+            activeLink === "/contact" ? "bg-gray-300 underline" : "bg-white"
+          } text-black uppercase text-xs md:text-base px-1 py-2 hover:bg-gray-200 transition-colors duration-200 pe-2 md:pe-4 rounded-r-full ${
             isAnimating ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
