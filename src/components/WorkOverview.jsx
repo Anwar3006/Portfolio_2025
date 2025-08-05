@@ -1,12 +1,15 @@
 import { useGSAP } from "@gsap/react";
 import { format } from "date-fns";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import { useRef } from "react";
 import { Link } from "react-router";
 import {
   handleMouseEnterLink,
   handleMouseLeaveLink,
 } from "../utils/eventDispatcher";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const WorkOverview = ({
   title,
@@ -19,6 +22,7 @@ const WorkOverview = ({
 }) => {
   const footerRef = useRef(null);
   const techStackRef = useRef(null);
+  const scrollTriggerRef = useRef(null);
 
   useGSAP(() => {
     const footer = footerRef.current;
@@ -28,19 +32,18 @@ const WorkOverview = ({
 
     const techItems = techStackContainer.querySelectorAll("li");
 
+    // Clean up previous ScrollTrigger
+    if (scrollTriggerRef.current) {
+      scrollTriggerRef.current.kill();
+    }
+
     // Set initial states
     gsap.set(footer, { y: 50, opacity: 0 });
     gsap.set(techItems, { y: 20, opacity: 0 });
 
     // Create timeline with ScrollTrigger
     const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 60%",
-        end: "bottom 20%",
-        toggleActions: "restart none none reverse", // Restart every time it enters viewport
-        // Alternative: "play none none reverse" - plays once per scroll direction
-      },
+      paused: true
     });
 
     // Animate footer
@@ -62,7 +65,24 @@ const WorkOverview = ({
       },
       "-=0.2"
     ); // Start 0.2 seconds before footer animation ends
-  });
+
+    // Create ScrollTrigger and store reference
+    scrollTriggerRef.current = ScrollTrigger.create({
+      trigger: section,
+      start: "top 60%",
+      end: "bottom 20%",
+      toggleActions: "restart none none reverse",
+      animation: tl
+    });
+
+    // Cleanup function
+    return () => {
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill();
+        scrollTriggerRef.current = null;
+      }
+    };
+  }, []);
 
   const handleMouseEnter = () => {
     window.dispatchEvent(new CustomEvent("enter-explore-project"));

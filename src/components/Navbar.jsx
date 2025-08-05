@@ -5,12 +5,14 @@ import {
   handleMouseLeaveLink,
 } from "../utils/eventDispatcher";
 import { animatePageOut } from "../utils/animatePageTransitions";
+import { useLenis } from "lenis/react";
 
 const Navbar = ({ transitionRef }) => {
   const [isAnimating, setIsAnimating] = useState(false); // Prevent multiple animations
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const navigate = useNavigate();
+  const lenis = useLenis();
 
   //handle isActive for links
   useEffect(() => {
@@ -31,15 +33,26 @@ const Navbar = ({ transitionRef }) => {
     setIsAnimating(true);
 
     try {
+      // Scroll to top immediately before starting animation
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+
       await animatePageOut(transitionRef);
       navigate(href);
       console.log("After animation, navigating to:", href);
 
-      // Scroll to top after navigation
+      // Additional scroll to top after navigation with longer delay
       setTimeout(() => {
-        window.scrollTo(0, 0);
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
         setIsAnimating(false);
-      }, 100);
+      }, 200); // Increased delay
     } catch (error) {
       console.error("Navigation animation failed:", error);
       setIsAnimating(false);
@@ -59,29 +72,49 @@ const Navbar = ({ transitionRef }) => {
       const aboutSection = document.getElementById("about");
       if (aboutSection) {
         setActiveLink("/about");
-        aboutSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        if (lenis) {
+          lenis.scrollTo(aboutSection, { duration: 1.5 });
+        } else {
+          aboutSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
       }
     } else {
       // We're on a different page, navigate to home with animation
       setIsAnimating(true);
 
       try {
+        // Scroll to top before animation
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
+
         await animatePageOut(transitionRef);
         navigate("/");
 
-        // Wait for navigation to complete, then scroll
+        // Wait for navigation to complete, then scroll to about section
         setTimeout(() => {
-          const aboutSection = document.getElementById("about");
-          if (aboutSection) {
-            aboutSection.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
+          if (lenis) {
+            lenis.scrollTo(0, { immediate: true }); // Ensure we start from top
           }
-          setIsAnimating(false);
+          
+          // Additional timeout to ensure DOM is ready
+          setTimeout(() => {
+            const aboutSection = document.getElementById("about");
+            if (aboutSection && lenis) {
+              lenis.scrollTo(aboutSection, { duration: 1.5 });
+            } else if (aboutSection) {
+              aboutSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+            setIsAnimating(false);
+          }, 100);
         }, 300); // Increased delay to ensure page loads
       } catch (error) {
         console.error("About navigation failed:", error);
@@ -97,8 +130,13 @@ const Navbar = ({ transitionRef }) => {
     if (isAnimating) return;
 
     if (location.pathname === "/") {
-      setIsActive(true);
-      window.location.reload();
+      setActiveLink("/");
+      // Scroll to top instead of reloading
+      if (lenis) {
+        lenis.scrollTo(0, { duration: 1.5 });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     } else {
       await handleNavigationTransition("/");
     }

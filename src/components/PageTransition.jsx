@@ -16,19 +16,31 @@ const PageTransition = ({ transitionRef }) => {
       lenis.stop();
     }
 
-    if (location.pathname === window.location.pathname) {
-      // If the path hasn't changed, just animate the page in
-      animatePageIn(transitionRef);
-      return;
-    }
-
+    // Animate page transition
     animatePageIn(transitionRef);
 
-    if (lenis) {
-      lenis.start();
-      // Scroll to top for new page
-      lenis.scrollTo(0, { immediate: true });
-    }
+    // Use a timeout to ensure the transition completes before restarting Lenis
+    const timer = setTimeout(() => {
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true }); // Scroll to top first
+        lenis.start(); // Then start Lenis
+      }
+      // Fallback scroll to top
+      window.scrollTo(0, 0);
+    }, 100); // Small delay to ensure DOM is ready
+
+    // Additional timer for extra safety
+    const safetyTimer = setTimeout(() => {
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      }
+      window.scrollTo(0, 0);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(safetyTimer);
+    };
   }, [location.pathname]);
 
   return (

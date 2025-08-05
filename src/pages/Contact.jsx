@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import {
   handleMouseEnterLink,
   handleMouseLeaveLink,
 } from "../utils/eventDispatcher";
+import { useLenis } from "lenis/react";
 
 const Contact = ({ transitionRef }) => {
+  const lenis = useLenis();
+
+  useEffect(() => {
+    // Ensure page starts from top
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [lenis]);
+
   return (
     <section className="relative h-dvh w-screen z-5 flex flex-col items-center justify-between bg-white">
       <Navbar transitionRef={transitionRef} />
