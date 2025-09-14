@@ -6,7 +6,7 @@ const OptimizedMedia = ({ src, alt, width, height, className }) => {
 
   const extension = src.split(".").pop().toLowerCase();
   const mediaType = extension === "mp4" ? "video" : "image";
-  const cloudinaryUrl = `https://res.cloudinary.com/daffqurhi/${mediaType}/upload/f_auto,q_auto,c_scale/portfolio_2025/projects${src}`;
+  const cloudinaryUrl = `https://res.cloudinary.com/daffqurhi/${mediaType}/upload/f_auto,q_auto,c_scale/portfolio_2025/${src}`;
 
   const handleLoad = () => {
     setIsLoaded(true);

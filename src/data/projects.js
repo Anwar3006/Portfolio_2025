@@ -13,9 +13,9 @@ export const projects = [
       { name: "GSAP", icon: "/icons/gsap.svg" },
     ],
     media: [
-      "/zentry-clone/zentry-clone-wf.png",
-      "/zentry-clone/zentry-clone-code.png",
-      "/zentry-clone/zentry-clone-live.mp4",
+      "projects/zentry_clone/zentry-clone-wf.png",
+      "projects/zentry_clone/zentry-clone-code.png",
+      "projects/zentry_clone/zentry-clone-live.mp4",
     ],
     githubUrl: "https://github.com/Anwar3006/zentry-clone",
     websiteUrl: "",
@@ -34,9 +34,9 @@ export const projects = [
       { name: "GSAP", icon: "/icons/gsap.svg" },
     ],
     media: [
-      "/minimalist_watch/watch_code.png",
-      "/minimalist_watch/watch_phone.mp4",
-      "/minimalist_watch/watch_laptop.mp4",
+      "projects/minimalist_watch/watch_code.png",
+      "projects/minimalist_watch/watch_phone.mp4",
+      "projects/minimalist_watch/watch_laptop.mp4",
     ],
     githubUrl: "https://github.com/Anwar3006/Minimalist_Watch/",
     websiteUrl: "https://minimalist-watch.netlify.app/",
@@ -63,3 +63,6 @@ export const projects = [
 
 //https://res.cloudinary.com/daffqurhi/image/upload/f_auto,q_auto,c_scale/portfolio_2025/projects/minimalist_watch/watch_code.png
 //https://res.cloudinary.com/daffqurhi/image/upload/f_auto,q_auto,c_scale/portfolio_2025//minimalist_watch/watch_code.png
+//https://res.cloudinary.com/daffqurhi/video/upload/v1751834147/portfolio_2025/projects/minimalist_watch/watch_phone.mp4
+//https://res.cloudinary.com/daffqurhi/image/upload/f_auto,q_auto,c_scale/portfolio_2025/projects/zentry-clone/zentry-clone-wf.png
+//https://res.cloudinary.com/daffqurhi/image/upload/f_auto,q_auto,c_scale/portfolio_2025/projects/zentry_clone/zentry-clone-wf.png

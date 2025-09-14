@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import ProjectDetail from "../components/ProjectDetail";
 import { projects } from "../data/projects";
@@ -11,7 +11,6 @@ const ProjectDetailPage = () => {
   const nextProject = projects.find((p) => p.slug === project?.nextProjectSlug);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     window.dispatchEvent(new CustomEvent("cursor-reset"));
   }, [slug]);
 

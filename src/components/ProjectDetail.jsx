@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import ProjectPills from "./ProjectPill";
 
 import OptimizedMedia from "./OptimizedMedia";
@@ -14,15 +14,6 @@ const ProjectDetail = ({
   nextProjectTitle,
   nextProjectHref,
 }) => {
-  const navigate = useNavigate();
-
-  const handleScroll = (path) => {
-    navigate(path);
-
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
-  };
   return (
     <div className="w-screen h-dvh mt-16 md:mt-32">
       {/* Section Header */}
@@ -80,7 +71,6 @@ const ProjectDetail = ({
         </div>
         <Link
           to={`${nextProjectHref}`}
-          onClick={() => handleScroll()}
           className="group flex items-center justify-center gap-2"
         >
           <p className="text-xs md:text-sm text-nowrap group-hover:text-400 transition-colors duration-500">
