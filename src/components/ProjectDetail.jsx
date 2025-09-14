@@ -4,7 +4,7 @@ import ProjectPills from "./ProjectPill";
 import OptimizedMedia from "./OptimizedMedia";
 
 // Component
-const SingleProject = ({
+const ProjectDetail = ({
   title,
   subtitle,
   techStack = [],
@@ -97,4 +97,4 @@ const SingleProject = ({
   );
 };
 
-export default SingleProject;
+export default ProjectDetail;

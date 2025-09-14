@@ -1,9 +1,9 @@
+import { forwardRef, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { format } from "date-fns";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useRef } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import {
   handleMouseEnterLink,
   handleMouseLeaveLink,
@@ -11,18 +11,11 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const WorkOverview = ({
-  title,
-  subtitle,
-  image,
-  date,
-  techStack = [],
-  projectUrl,
-  ref,
-}) => {
-  const footerRef = useRef(null);
-  const techStackRef = useRef(null);
-  const scrollTriggerRef = useRef(null);
+const ProjectCard = forwardRef(
+  ({ title, subtitle, image, date, techStack = [], projectUrl }, ref) => {
+    const footerRef = useRef(null);
+    const techStackRef = useRef(null);
+    const scrollTriggerRef = useRef(null);
 
   useGSAP(() => {
     const footer = footerRef.current;
@@ -167,4 +160,4 @@ const WorkOverview = ({
   );
 };
 
-export default WorkOverview;
+export default ProjectCard;

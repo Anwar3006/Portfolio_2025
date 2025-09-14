@@ -6,7 +6,7 @@ import {
 } from "../utils/eventDispatcher";
 import { useLenis } from "lenis/react";
 
-const Contact = ({ transitionRef }) => {
+const Contact = () => {
   const lenis = useLenis();
 
   useEffect(() => {

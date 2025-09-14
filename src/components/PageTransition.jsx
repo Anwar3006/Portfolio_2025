@@ -1,35 +1,30 @@
 import { useGSAP } from "@gsap/react";
-
 import { useLocation } from "react-router";
 import { animatePageIn } from "../utils/animatePageTransitions";
 import { useLenis } from "lenis/react";
+import { useTransitionContext } from "../contexts/TransitionContext";
 
-const PageTransition = ({ transitionRef }) => {
+const PageTransition = () => {
+  const { transitionRef } = useTransitionContext();
   const lenis = useLenis();
-  //   const containerRef = useRef(null);
   const location = useLocation();
   const noOfColumns = 6;
 
   useGSAP(() => {
-    // Stop Lenis during transition
     if (lenis) {
       lenis.stop();
     }
 
-    // Animate page transition
-    animatePageIn(transitionRef);
+    animatePageIn(transitionRef.current);
 
-    // Use a timeout to ensure the transition completes before restarting Lenis
     const timer = setTimeout(() => {
       if (lenis) {
-        lenis.scrollTo(0, { immediate: true }); // Scroll to top first
-        lenis.start(); // Then start Lenis
+        lenis.scrollTo(0, { immediate: true });
+        lenis.start();
       }
-      // Fallback scroll to top
       window.scrollTo(0, 0);
-    }, 100); // Small delay to ensure DOM is ready
+    }, 100);
 
-    // Additional timer for extra safety
     const safetyTimer = setTimeout(() => {
       if (lenis) {
         lenis.scrollTo(0, { immediate: true });
@@ -41,7 +36,7 @@ const PageTransition = ({ transitionRef }) => {
       clearTimeout(timer);
       clearTimeout(safetyTimer);
     };
-  }, [location.pathname]);
+  }, [location.pathname, lenis, transitionRef]);
 
   return (
     <section

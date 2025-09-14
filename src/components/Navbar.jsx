@@ -1,50 +1,39 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   handleMouseEnterLink,
   handleMouseLeaveLink,
 } from "../utils/eventDispatcher";
 import { animatePageOut } from "../utils/animatePageTransitions";
 import { useLenis } from "lenis/react";
+import { useTransitionContext } from "../contexts/TransitionContext";
 
-const Navbar = ({ transitionRef }) => {
-  const [isAnimating, setIsAnimating] = useState(false); // Prevent multiple animations
+const Navbar = () => {
+  const { transitionRef } = useTransitionContext();
+  const [isAnimating, setIsAnimating] = useState(false);
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const navigate = useNavigate();
   const lenis = useLenis();
 
-  //handle isActive for links
   useEffect(() => {
     setActiveLink(location.pathname);
   }, [location.pathname]);
 
-  // Handle page transition with animation
   const handleNavigationTransition = async (href) => {
-    // Prevent multiple animations
     if (isAnimating) return;
-
-    // Check if we're already on the target page
     if (location.pathname === href) {
-      console.log("Already on this page, skipping animation");
       return;
     }
-
     setIsAnimating(true);
-
     try {
-      // Scroll to top immediately before starting animation
       if (lenis) {
         lenis.scrollTo(0, { immediate: true });
       } else {
         window.scrollTo(0, 0);
       }
-
-      await animatePageOut(transitionRef);
+      await animatePageOut(transitionRef.current);
       navigate(href);
-      console.log("After animation, navigating to:", href);
-
-      // Additional scroll to top after navigation with longer delay
       setTimeout(() => {
         if (lenis) {
           lenis.scrollTo(0, { immediate: true });
@@ -52,23 +41,18 @@ const Navbar = ({ transitionRef }) => {
           window.scrollTo(0, 0);
         }
         setIsAnimating(false);
-      }, 200); // Increased delay
+      }, 200);
     } catch (error) {
       console.error("Navigation animation failed:", error);
       setIsAnimating(false);
     }
   };
 
-  // Handle about link click
   const handleAboutClick = async (e) => {
     e.preventDefault();
-
-    // Prevent multiple clicks
     if (isAnimating) return;
 
-    // Check if we're on the home page
     if (location.pathname === "/") {
-      // We're on home page, just scroll to about section
       const aboutSection = document.getElementById("about");
       if (aboutSection) {
         setActiveLink("/about");
@@ -82,27 +66,19 @@ const Navbar = ({ transitionRef }) => {
         }
       }
     } else {
-      // We're on a different page, navigate to home with animation
       setIsAnimating(true);
-
       try {
-        // Scroll to top before animation
         if (lenis) {
           lenis.scrollTo(0, { immediate: true });
         } else {
           window.scrollTo(0, 0);
         }
-
-        await animatePageOut(transitionRef);
+        await animatePageOut(transitionRef.current);
         navigate("/");
-
-        // Wait for navigation to complete, then scroll to about section
         setTimeout(() => {
           if (lenis) {
-            lenis.scrollTo(0, { immediate: true }); // Ensure we start from top
+            lenis.scrollTo(0, { immediate: true });
           }
-          
-          // Additional timeout to ensure DOM is ready
           setTimeout(() => {
             const aboutSection = document.getElementById("about");
             if (aboutSection && lenis) {
@@ -115,7 +91,7 @@ const Navbar = ({ transitionRef }) => {
             }
             setIsAnimating(false);
           }, 100);
-        }, 300); // Increased delay to ensure page loads
+        }, 300);
       } catch (error) {
         console.error("About navigation failed:", error);
         setIsAnimating(false);

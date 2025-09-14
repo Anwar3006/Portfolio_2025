@@ -1,68 +1,50 @@
-import { lazy, Suspense, useRef } from "react";
-import {
-  BrowserRouter,
-  HashRouter,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router";
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CustomCursor from "./components/CustomCursor";
 import { ReactLenis } from "lenis/react";
 import PageTransition from "./components/PageTransition";
+import { TransitionProvider } from "./contexts/TransitionContext";
 
 const HomePage = lazy(() => import("./pages/Home"));
-const WorksPage = lazy(() => import("./pages/Works"));
-const ProjectPage = lazy(() => import("./pages/Project"));
+const ProjectListPage = lazy(() => import("./pages/ProjectListPage"));
+const ProjectDetailPage = lazy(() => import("./pages/ProjectDetailPage"));
 const ContactPage = lazy(() => import("./pages/Contact"));
 const NotFoundPage = lazy(() => import("./pages/NotFound"));
 
 const App = () => {
-  const transitionRef = useRef(null);
-
   return (
     <BrowserRouter>
-      <ReactLenis
-        root
-        options={{
-          duration: 1.4,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          gestureOrientation: "vertical",
-          direction: "vertical",
-          smooth: true,
-          smoothTouch: false,
-          touchMultiplier: 2,
-          autoResize: true,
-          // Add these options to help with stability
-          syncTouch: false,
-          touchInertiaMultiplier: 35,
-          wheelMultiplier: 1,
-          infinite: false,
-        }}
-      >
-        <PageTransition transitionRef={transitionRef} />
-        <CustomCursor />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route
-              path="/"
-              element={<HomePage transitionRef={transitionRef} />}
-            />
-            <Route
-              path="/works"
-              element={<WorksPage transitionRef={transitionRef} />}
-            />
-            <Route
-              path="/works/:slug"
-              element={<ProjectPage transitionRef={transitionRef} />}
-            />
-            <Route
-              path="/contact"
-              element={<ContactPage transitionRef={transitionRef} />}
-            />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-      </ReactLenis>
+      <TransitionProvider>
+        <ReactLenis
+          root
+          options={{
+            duration: 1.4,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            gestureOrientation: "vertical",
+            direction: "vertical",
+            smooth: true,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            autoResize: true,
+            syncTouch: false,
+            touchInertiaMultiplier: 35,
+            wheelMultiplier: 1,
+            infinite: false,
+          }}
+        >
+          <PageTransition />
+          <CustomCursor />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/works" element={<ProjectListPage />} />
+              <Route path="/works/:slug" element={<ProjectDetailPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </ReactLenis>
+      </TransitionProvider>
     </BrowserRouter>
   );
 };
