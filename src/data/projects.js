@@ -3,7 +3,8 @@ export const projects = [
     slug: "zentry-clone",
     title: "Zentry Clone",
     subtitle: "(Landing Page)",
-    description: "A clone of the Zentry landing page, built with React and Tailwind CSS.",
+    description:
+      "A clone of the Zentry landing page, built with React and Tailwind CSS.",
     date: new Date("2024-02-01"),
     image: "/images/p2-gif.jpg",
     techStack: [
@@ -59,3 +60,6 @@ export const projects = [
     nextProjectSlug: "zentry-clone",
   },
 ];
+
+//https://res.cloudinary.com/daffqurhi/image/upload/f_auto,q_auto,c_scale/portfolio_2025/projects/minimalist_watch/watch_code.png
+//https://res.cloudinary.com/daffqurhi/image/upload/f_auto,q_auto,c_scale/portfolio_2025//minimalist_watch/watch_code.png
