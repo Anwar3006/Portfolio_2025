@@ -6,7 +6,7 @@ import {
 } from "../utils/eventDispatcher";
 import { useLenis } from "lenis/react";
 
-const Contact = ({ transitionRef }) => {
+const Contact = () => {
   const lenis = useLenis();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Contact = ({ transitionRef }) => {
 
   return (
     <section className="relative h-dvh w-screen z-5 flex flex-col items-center justify-between bg-white">
-      <Navbar transitionRef={transitionRef} />
+      <Navbar />
 
       <div className="flex items-center justify-center w-full h-full">
         <a

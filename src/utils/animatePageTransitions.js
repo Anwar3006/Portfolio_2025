@@ -1,8 +1,7 @@
 import gsap from "gsap";
-import { useNavigate } from "react-router";
 
 export const animatePageIn = (containerRef) => {
-  const container = containerRef.current;
+  const container = containerRef;
   if (!container) return;
 
   const columns = container.children;

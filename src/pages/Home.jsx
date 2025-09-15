@@ -7,10 +7,10 @@ import CTA from "../components/CTA";
 import { useLenis } from "lenis/react";
 import { useEffect, useRef } from "react";
 
-const Home = ({ transitionRef }) => {
+const Home = () => {
   return (
     <div className="flex flex-col justify-start items-center bg-800">
-      <Navbar transitionRef={transitionRef} />
+      <Navbar />
       <Hero />
       <About />
       <ProjectVideo />

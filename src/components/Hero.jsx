@@ -1,17 +1,27 @@
 import { useRef } from "react";
-import { leftProject, rightProject } from "../utils/data";
+import { projects } from "../data/projects";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import {
   handleMouseEnterLink,
   handleMouseLeaveLink,
 } from "../utils/eventDispatcher";
 
-// Register plugins
 gsap.registerPlugin(ScrollTrigger);
+
+const leftProject = {
+  ...projects[0],
+  url: `/works/${projects[0].slug}`,
+  side: "left",
+};
+
+const rightProject = {
+  ...projects[1],
+  url: `/works/${projects[1].slug}`,
+  side: "right",
+};
 
 const ProjectLink = ({ project, side = "left" }) => {
   return (
@@ -19,7 +29,7 @@ const ProjectLink = ({ project, side = "left" }) => {
       to={project.url}
       className={`${side === "left" ? "text-left" : "text-right"}`}
     >
-      <h3 className="text-white">{project.name}</h3>
+      <h3 className="text-white">{project.title}</h3>
       <p className="text-400 text-sm">{project.description}</p>
     </Link>
   );
